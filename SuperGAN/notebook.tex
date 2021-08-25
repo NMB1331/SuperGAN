@@ -1,0 +1,1935 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{SuperGAN\_Test\_HeartrateNotebook}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    This notebook will test the Super GAN framework's effectiveness at
+generating synthetic heart rate data. Specifically, we will generate
+data for each class in the PTB Diagnostic ECG Dataset, and then we will
+train a classifier on the synthetic data and test it on the real data
+(TSTR) to evaluate the realism of the synthetic dataset.
+
+More information on the dataset is available at the following links: -
+https://www.physionet.org/physiobank/database/ptbdb/ -
+https://www.kaggle.com/shayanfazeli/heartbeat/
+
+For more information regarding this GAN framework, please see the
+following works: - R. Saeedi, S. Norgaard and A.H. Gebremedhin, A
+Closed-loop Deep Learning Architecture for Robust Activity Recognition
+using Wearable Sensors, 2017 IEEE International Conference on Big Data
+(BigData 2017). - S. Norgaard, R. Saeedi, K. Sasani, and A.H.
+Gebremedhin, Synthetic Sensor Data Generation for Health Applications: A
+Supervised Deep Learning Approach, IEEE Engineering in Medicine and
+Biology Society Conference (EMBC 2018).
+
+TO DO: - use trained GAN to generate synthetic samples - lastly, train
+ANOTHER classifier on the synthetic, and evaluate its performance on the
+real - explore other datasets to try in the future
+
+Author: Nathaniel M. Burley
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{c+c1}{\PYZsh{} Imports }
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+         \PY{k+kn}{import} \PY{n+nn}{training\PYZus{}module} \PY{k}{as} \PY{n+nn}{train}
+         \PY{k+kn}{import} \PY{n+nn}{input\PYZus{}module} \PY{k}{as} \PY{n+nn}{input\PYZus{}mod}
+         \PY{k+kn}{import} \PY{n+nn}{saving\PYZus{}module} \PY{k}{as} \PY{n+nn}{save}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}\PY{p}{,} \PY{n}{load\PYZus{}model}\PY{p}{,} \PY{n}{Sequential}\PY{p}{,} \PY{n}{Model}\PY{p}{,} \PY{n}{load\PYZus{}model}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{LSTM}\PY{p}{,} \PY{n}{Dropout}\PY{p}{,} \PY{n}{Input}\PY{p}{,} \PY{n}{Lambda}\PY{p}{,} \PY{n}{Conv1D}\PY{p}{,} \PY{n}{MaxPooling1D}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}\PY{p}{,} \PY{n}{f1\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{random} \PY{k}{import} \PY{n}{shuffle}
+         \PY{k+kn}{import} \PY{n+nn}{models}\PY{o}{,} \PY{n+nn}{sys}\PY{o}{,} \PY{n+nn}{h5py}\PY{o}{,} \PY{n+nn}{keras}
+         
+         \PY{c+c1}{\PYZsh{} Global variables/constants defined}
+         \PY{n}{CLASS0\PYZus{}DATAFILE} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/nmb1331/Downloads/heartbeat/ptbdb\PYZus{}normal.csv}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{CLASS1\PYZus{}DATAFILE} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/nmb1331/Downloads/heartbeat/ptbdb\PYZus{}abnormal.csv}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} Global variables for training}
+         \PY{n}{NUM\PYZus{}CLASSES} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{NUM\PYZus{}CLASSIFIER\PYZus{}EPOCHS} \PY{o}{=} \PY{l+m+mi}{15}
+         \PY{n}{CLASSIFIER\PYZus{}TRAIN\PYZus{}RATIO} \PY{o}{=} \PY{l+m+mf}{0.8}
+         \PY{n}{NUM\PYZus{}STATS} \PY{o}{=} \PY{l+m+mi}{9} \PY{c+c1}{\PYZsh{} Number of statistics computed for loss function. Do NOT change}
+\end{Verbatim}
+
+
+    To begin with, we will read in the CSV files to Pandas dataframes, and
+assign columns. Since they are not labeled in the file, we will assign
+them integer labels. There is one file per class in this dataset, so
+after we read them in we will have to blend them to form training and
+testing sets:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{c+c1}{\PYZsh{} Read in the data for class 0 (normal heartbeats); make datasets for this class (used in GAN)}
+         \PY{n}{hr\PYZus{}class0\PYZus{}raw} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{CLASS0\PYZus{}DATAFILE}\PY{p}{)}
+         \PY{n}{hr\PYZus{}class0\PYZus{}raw}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{hr\PYZus{}class0\PYZus{}raw}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{X\PYZus{}0} \PY{o}{=} \PY{n}{hr\PYZus{}class0\PYZus{}raw}
+         \PY{n}{Y\PYZus{}0} \PY{o}{=} \PY{n}{X\PYZus{}0}\PY{p}{[}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{T}
+         \PY{n}{Y\PYZus{}0} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{np\PYZus{}utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{Y\PYZus{}0}\PY{p}{)}
+         \PY{n}{X\PYZus{}0} \PY{o}{=} \PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X\PYZus{}0} \PY{o}{=} \PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{values}
+         \PY{n}{X\PYZus{}0} \PY{o}{=} \PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X\PYZus{}0 shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZus{}0 shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Y\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Read in the data for class 1 (abnormal heartbeat); make datasets for this class (used in GAN)}
+         \PY{n}{hr\PYZus{}class1\PYZus{}raw} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{CLASS1\PYZus{}DATAFILE}\PY{p}{)}
+         \PY{n}{hr\PYZus{}class1\PYZus{}raw}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{hr\PYZus{}class1\PYZus{}raw}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{X\PYZus{}1} \PY{o}{=} \PY{n}{hr\PYZus{}class1\PYZus{}raw}
+         \PY{n}{Y\PYZus{}1} \PY{o}{=} \PY{n}{X\PYZus{}1}\PY{p}{[}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{T}
+         \PY{n}{Y\PYZus{}1} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{np\PYZus{}utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{Y\PYZus{}1}\PY{p}{)}
+         \PY{n}{X\PYZus{}1} \PY{o}{=} \PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X\PYZus{}1} \PY{o}{=} \PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{values}
+         \PY{n}{X\PYZus{}1} \PY{o}{=} \PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X\PYZus{}1 shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZus{}1 shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Y\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Merge the two together; shuffle}
+         \PY{n}{all\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{hr\PYZus{}class0\PYZus{}raw}\PY{p}{,} \PY{n}{hr\PYZus{}class1\PYZus{}raw}\PY{p}{]}\PY{p}{)}
+         \PY{n}{int\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{shuffle}\PY{p}{(}\PY{n}{int\PYZus{}list}\PY{p}{)}
+         \PY{n}{all\PYZus{}data} \PY{o}{=} \PY{n}{all\PYZus{}data}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Build training and test sets for the classifier; extract labels; turn labels to categorical}
+         \PY{n}{msk} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{CLASSIFIER\PYZus{}TRAIN\PYZus{}RATIO}
+         \PY{n}{train\PYZus{}X} \PY{o}{=} \PY{n}{all\PYZus{}data}\PY{p}{[}\PY{n}{msk}\PY{p}{]}
+         \PY{n}{test\PYZus{}X} \PY{o}{=} \PY{n}{all\PYZus{}data}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{msk}\PY{p}{]}
+         \PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{train\PYZus{}Y} \PY{o}{=} \PY{n}{train\PYZus{}X}\PY{p}{[}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{T}
+         \PY{n}{train\PYZus{}Y} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{np\PYZus{}utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{train\PYZus{}Y}\PY{p}{)}
+         \PY{n}{test\PYZus{}Y} \PY{o}{=} \PY{n}{test\PYZus{}X}\PY{p}{[}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{T}
+         \PY{n}{test\PYZus{}Y} \PY{o}{=} \PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{np\PYZus{}utils}\PY{o}{.}\PY{n}{to\PYZus{}categorical}\PY{p}{(}\PY{n}{test\PYZus{}Y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Remove last column from train X and Y, turn into numpy arrays, reshape}
+         \PY{n}{train\PYZus{}X} \PY{o}{=} \PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{train\PYZus{}X} \PY{o}{=} \PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{values}
+         \PY{n}{train\PYZus{}X} \PY{o}{=} \PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}X} \PY{o}{=} \PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{test\PYZus{}X} \PY{o}{=} \PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{values}
+         \PY{n}{test\PYZus{}X} \PY{o}{=} \PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train X shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train Y shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{train\PYZus{}Y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test X shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Y shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{test\PYZus{}Y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Build an X for the WHOLE dataset}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}X}\PY{p}{,} \PY{n}{test\PYZus{}X}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{train\PYZus{}Y}\PY{p}{,} \PY{n}{test\PYZus{}Y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X\_0 shape: (4045, 187, 1)
+Y\_0 shape: (4045, 1)
+X\_1 shape: (10505, 187, 1)
+Y\_1 shape: (10505, 2)
+Train X shape: (11596, 187, 1)
+Train Y shape: (11596, 2)
+Test X shape: (2954, 187, 1)
+Test Y shape: (2954, 2)
+X shape: (14550, 187, 1)
+Y shape: (14550, 2)
+
+    \end{Verbatim}
+
+    Now that we have the data processed into training and testing sets, we
+will train a classifier on the data, which will be utilized in the GAN
+training process, per Saeedi et. all. Once the classifier is trained to
+98\% accuracy or so, we will save it:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{c+c1}{\PYZsh{} Parameters for training shape}
+         \PY{n}{num\PYZus{}seqs} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{seq\PYZus{}length} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{num\PYZus{}channels} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{input\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Function that creates our classifier}
+         \PY{k}{def} \PY{n+nf}{createClassifier}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+             \PY{n}{classifier} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classifier}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv1D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{input\PYZus{}shape}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling1D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv1D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{96}\PY{p}{,} \PY{n}{use\PYZus{}bias}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{true}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv1D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv1D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{48}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling1D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv1D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{MaxPooling1D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}classifer.add(Reshape(15, num\PYZus{}channels * 32))}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{LSTM}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tanh}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{LSTM}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tanh}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{NUM\PYZus{}CLASSES}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{softmax}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Training parameters}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rmsprop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binary\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{classifier}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{classifier}
+         
+         \PY{c+c1}{\PYZsh{} Classifier trained here!}
+         \PY{n}{model} \PY{o}{=} \PY{n}{createClassifier}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{)}
+         \PY{n}{results} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}X}\PY{p}{,} \PY{n}{train\PYZus{}Y}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{test\PYZus{}X}\PY{p}{,} \PY{n}{test\PYZus{}Y}\PY{p}{)}\PY{p}{,}\PYZbs{}
+                 \PY{n}{epochs}\PY{o}{=}\PY{n}{NUM\PYZus{}CLASSIFIER\PYZus{}EPOCHS}\PY{p}{,} \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{64}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+conv1d\_66 (Conv1D)           (None, 187, 128)          768       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling1d\_40 (MaxPooling (None, 93, 128)           0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv1d\_67 (Conv1D)           (None, 93, 96)            61536     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv1d\_68 (Conv1D)           (None, 93, 64)            30784     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv1d\_69 (Conv1D)           (None, 93, 48)            15408     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling1d\_41 (MaxPooling (None, 46, 48)            0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv1d\_70 (Conv1D)           (None, 46, 32)            7712      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling1d\_42 (MaxPooling (None, 23, 32)            0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_100 (Dropout)        (None, 23, 32)            0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm\_67 (LSTM)               (None, 23, 128)           82432     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_101 (Dropout)        (None, 23, 128)           0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm\_68 (LSTM)               (None, 128)               131584    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_102 (Dropout)        (None, 128)               0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_54 (Dense)             (None, 2)                 258       
+=================================================================
+Total params: 330,482
+Trainable params: 330,482
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Train on 11596 samples, validate on 2954 samples
+Epoch 1/15
+11596/11596 [==============================] - 44s 4ms/step - loss: 0.5099 - acc: 0.7601 - val\_loss: 0.4532 - val\_acc: 0.7837
+Epoch 2/15
+11596/11596 [==============================] - 32s 3ms/step - loss: 0.3582 - acc: 0.8502 - val\_loss: 0.4780 - val\_acc: 0.8067
+Epoch 3/15
+11596/11596 [==============================] - 31s 3ms/step - loss: 0.2810 - acc: 0.8910 - val\_loss: 0.2522 - val\_acc: 0.8988
+Epoch 4/15
+11596/11596 [==============================] - 30s 3ms/step - loss: 0.2409 - acc: 0.9140 - val\_loss: 0.2118 - val\_acc: 0.9255
+Epoch 5/15
+11596/11596 [==============================] - 32s 3ms/step - loss: 0.2080 - acc: 0.9269 - val\_loss: 0.1621 - val\_acc: 0.9441
+Epoch 6/15
+11596/11596 [==============================] - 29s 3ms/step - loss: 0.1843 - acc: 0.9342 - val\_loss: 0.2028 - val\_acc: 0.9228
+Epoch 7/15
+11596/11596 [==============================] - 29s 3ms/step - loss: 0.1584 - acc: 0.9439 - val\_loss: 0.2331 - val\_acc: 0.9326
+Epoch 8/15
+11596/11596 [==============================] - 29s 3ms/step - loss: 0.1428 - acc: 0.9458 - val\_loss: 0.1118 - val\_acc: 0.9580
+Epoch 9/15
+11596/11596 [==============================] - 30s 3ms/step - loss: 0.1226 - acc: 0.9555 - val\_loss: 0.1546 - val\_acc: 0.9391
+Epoch 10/15
+11596/11596 [==============================] - 30s 3ms/step - loss: 0.1076 - acc: 0.9621 - val\_loss: 0.8527 - val\_acc: 0.8158
+Epoch 11/15
+11596/11596 [==============================] - 31s 3ms/step - loss: 0.1076 - acc: 0.9627 - val\_loss: 0.0663 - val\_acc: 0.9753
+Epoch 12/15
+11596/11596 [==============================] - 32s 3ms/step - loss: 0.0872 - acc: 0.9680 - val\_loss: 0.0880 - val\_acc: 0.9733
+Epoch 13/15
+11596/11596 [==============================] - 30s 3ms/step - loss: 0.0827 - acc: 0.9712 - val\_loss: 0.0740 - val\_acc: 0.9783
+Epoch 14/15
+11596/11596 [==============================] - 30s 3ms/step - loss: 0.0738 - acc: 0.9738 - val\_loss: 0.0543 - val\_acc: 0.9814
+Epoch 15/15
+11596/11596 [==============================] - 31s 3ms/step - loss: 0.0717 - acc: 0.9758 - val\_loss: 0.0521 - val\_acc: 0.9821
+
+    \end{Verbatim}
+
+    Awesome. Now that we have the classifier trained, we'll move on to
+training the GAN. Here are some important constants used in the training
+process:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{c+c1}{\PYZsh{} PARAMETERS RELATED TO TRAINING}
+         \PY{n}{latent\PYZus{}dim} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{}length of random input fed to generator (should it be num\PYZus{}classes + 1?)}
+         \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{100} \PY{c+c1}{\PYZsh{}num training epochs}
+         \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{30} \PY{c+c1}{\PYZsh{}num instances generated for G/D training}
+         \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{100} \PY{c+c1}{\PYZsh{}num instances generated for validating data}
+         \PY{n}{real\PYZus{}synthetic\PYZus{}ratio} \PY{o}{=} \PY{l+m+mi}{5} \PY{c+c1}{\PYZsh{}num synthetic instances per real instance for computing RTS metric}
+         \PY{n}{synthetic\PYZus{}synthetic\PYZus{}ratio} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{}num synthetic instances to compare for computing STS metric}
+         \PY{n}{disc\PYZus{}lr} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{01} \PY{c+c1}{\PYZsh{}learning rate of discriminator}
+         \PY{n}{accuracy\PYZus{}threshold} \PY{o}{=} \PY{l+m+mf}{0.95} \PY{c+c1}{\PYZsh{}threshold to stop generator training}
+         
+         \PY{c+c1}{\PYZsh{} WEIGHTS FOR DIFFERENT TERMS IN THE LOSS FUNCTION}
+         \PY{n}{D\PYZus{}loss\PYZus{}weight} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{C\PYZus{}loss\PYZus{}weight} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{SFD\PYZus{}loss\PYZus{}weight} \PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    Now that we have those constants defined, we'll build the models:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{c+c1}{\PYZsh{} CREATE GENERATOR AND DISCRIMINATOR}
+         \PY{n}{C} \PY{o}{=} \PY{n}{model} \PY{c+c1}{\PYZsh{} Classifier we trained earlier (To show, \PYZsh{}print(C.summary()) )}
+         \PY{n}{C}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} Generator/discriminator for class 0}
+         \PY{n}{G\PYZus{}0} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{create\PYZus{}G}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{,} \PY{n}{latent\PYZus{}dim}\PY{p}{)}
+         \PY{n}{D\PYZus{}0} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{create\PYZus{}D}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}
+         \PY{n}{D\PYZus{}to\PYZus{}freeze\PYZus{}0} \PY{o}{=} \PY{n}{D}
+         \PY{n}{D\PYZus{}model\PYZus{}0} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{compile\PYZus{}discriminator\PYZus{}model}\PY{p}{(}\PY{n}{D\PYZus{}0}\PY{p}{,} \PY{n}{disc\PYZus{}lr}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Generator/discriminator for class 0}
+         \PY{n}{G\PYZus{}1} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{create\PYZus{}G}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{,} \PY{n}{latent\PYZus{}dim}\PY{p}{)}
+         \PY{n}{D\PYZus{}1} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{create\PYZus{}D}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}
+         \PY{n}{D\PYZus{}to\PYZus{}freeze\PYZus{}1} \PY{o}{=} \PY{n}{D}
+         \PY{n}{D\PYZus{}model\PYZus{}1} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{compile\PYZus{}discriminator\PYZus{}model}\PY{p}{(}\PY{n}{D\PYZus{}1}\PY{p}{,} \PY{n}{disc\PYZus{}lr}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} CREATE STATISTICAL FEATURE NETWORK AND COMPUTE FEATURE VECTOR FOR REAL DATA (used in loss function)}
+         \PY{n}{feature\PYZus{}net\PYZus{}0} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{create\PYZus{}statistical\PYZus{}feature\PYZus{}net}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}
+         \PY{n}{S\PYZus{}X\PYZus{}train\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{feature\PYZus{}net}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                                          \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{o}{*}\PY{n}{NUM\PYZus{}STATS}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}  
+         \PY{n}{S\PYZus{}X\PYZus{}test\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{feature\PYZus{}net}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                                         \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{o}{*}\PY{n}{NUM\PYZus{}STATS}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} DO THE SAME FOR CLASS ONE}
+         \PY{n}{feature\PYZus{}net\PYZus{}1} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{create\PYZus{}statistical\PYZus{}feature\PYZus{}net}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}
+         \PY{n}{S\PYZus{}X\PYZus{}train\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{feature\PYZus{}net}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                                          \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{o}{*}\PY{n}{NUM\PYZus{}STATS}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}  
+         \PY{n}{S\PYZus{}X\PYZus{}test\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{feature\PYZus{}net}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                                         \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{o}{*}\PY{n}{NUM\PYZus{}STATS}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+input\_61 (InputLayer)        (None, 187, 1)            0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_105 (Dropout)        (None, 187, 1)            0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm\_70 (LSTM)               (None, 100)               40800     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_56 (Dense)             (None, 1)                 101       
+=================================================================
+Total params: 40,901
+Trainable params: 40,901
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+input\_63 (InputLayer)        (None, 187, 1)            0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_108 (Dropout)        (None, 187, 1)            0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+lstm\_72 (LSTM)               (None, 100)               40800     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_58 (Dense)             (None, 1)                 101       
+=================================================================
+Total params: 40,901
+Trainable params: 40,901
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    Having built the models, we will now train the GAN, first for Class 0:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{c+c1}{\PYZsh{} SET CLASS LABEL TO ZERO}
+         \PY{n}{class\PYZus{}label} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{c+c1}{\PYZsh{}CREATE FULL ARCHITECTURE WHERE OUPUT OF GENERATOR IS FED TO DISCRIMINATOR AND CLASSIFIER}
+         \PY{k}{for} \PY{n}{layer} \PY{o+ow}{in} \PY{n}{D\PYZus{}to\PYZus{}freeze}\PY{o}{.}\PY{n}{layers}\PY{p}{:}
+             \PY{n}{layer}\PY{o}{.}\PY{n}{trainable} \PY{o}{=} \PY{k+kc}{False}
+         \PY{n}{GCD} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{inputs}\PY{o}{=}\PY{n}{G\PYZus{}0}\PY{o}{.}\PY{n}{input}\PY{p}{,} \PY{n}{outputs}\PY{o}{=}\PY{p}{[}\PY{n}{D\PYZus{}to\PYZus{}freeze\PYZus{}0}\PY{p}{(}\PY{n}{G\PYZus{}0}\PY{o}{.}\PY{n}{output}\PY{p}{)}\PY{p}{,} \PY{n}{C}\PY{p}{(}\PY{n}{G\PYZus{}0}\PY{o}{.}\PY{n}{output}\PY{p}{)}\PY{p}{,} \PY{n}{feature\PYZus{}net}\PY{p}{(}\PY{n}{G\PYZus{}0}\PY{o}{.}\PY{n}{output}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{GCD}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{binary\PYZus{}crossentropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{binary\PYZus{}crossentropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SFN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{train}\PY{o}{.}\PY{n}{euc\PYZus{}dist\PYZus{}loss}\PY{p}{\PYZcb{}}\PY{p}{,}\PYZbs{}
+                     \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{adam}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PYZbs{}
+                     \PY{n}{loss\PYZus{}weights} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{D\PYZus{}loss\PYZus{}weight}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{C\PYZus{}loss\PYZus{}weight}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SFN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{SFD\PYZus{}loss\PYZus{}weight}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         
+         \PY{n}{GC\PYZus{}acc}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{n}{epoch}\PY{o}{=}\PY{l+m+mi}{1}
+         
+         \PY{k}{while} \PY{n}{GC\PYZus{}acc}\PY{o}{\PYZlt{}}\PY{n}{accuracy\PYZus{}threshold} \PY{o+ow}{or} \PY{n}{epoch} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{100}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{epoch}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}TRAIN DISCRIMINATOR AND GENERATOR AND DISPLAY ACCURACY FOR EACH}
+             \PY{n}{D\PYZus{}loss\PYZus{}vec} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{train\PYZus{}D}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{X\PYZus{}0}\PY{p}{,} \PY{n}{G\PYZus{}0}\PY{p}{,} \PY{n}{D\PYZus{}model\PYZus{}0}\PY{p}{,} \PY{n}{latent\PYZus{}dim}\PY{p}{)}
+             \PY{n}{GCD\PYZus{}loss\PYZus{}vec} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{train\PYZus{}G}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{X\PYZus{}0}\PY{p}{,} \PY{n}{class\PYZus{}label}\PY{p}{,} \PY{n}{S\PYZus{}X\PYZus{}train\PYZus{}0}\PY{p}{,} \PY{n}{NUM\PYZus{}CLASSES}\PY{p}{,} \PY{n}{GCD}\PY{p}{,} \PY{n}{latent\PYZus{}dim}\PY{p}{)}
+             \PY{n}{D\PYZus{}acc} \PY{o}{=} \PY{n}{D\PYZus{}loss\PYZus{}vec}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{}accuracy for discriminator during its \PYZdq{}turn\PYZdq{} for training}
+             \PY{n}{GD\PYZus{}acc} \PY{o}{=} \PY{n}{GCD\PYZus{}loss\PYZus{}vec}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{c+c1}{\PYZsh{}accuracy for generator in tricking discriminator}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D Acc: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{D\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G Acc in tricking D: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{GD\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}GENERATE SYNTHETIC DATA AND FEED TO CLASSIFIER TO DETERMINE ACCURACY}
+             \PY{n}{synthetic\PYZus{}data} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{generate\PYZus{}synthetic\PYZus{}data}\PY{p}{(}\PY{n}{test\PYZus{}size}\PY{p}{,} \PY{n}{G\PYZus{}0}\PY{p}{,} \PY{n}{latent\PYZus{}dim}\PY{p}{,} \PY{n}{seq\PYZus{}length}\PY{p}{)}
+             \PY{n}{pred} \PY{o}{=} \PY{n}{C}\PY{o}{.}\PY{n}{predict\PYZus{}classes}\PY{p}{(}\PY{n}{synthetic\PYZus{}data}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{p}{,}\PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{true} \PY{o}{=} \PY{p}{[}\PY{n}{class\PYZus{}label}\PY{p}{]}\PY{o}{*}\PY{n}{test\PYZus{}size}
+             \PY{n}{GC\PYZus{}acc} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{true}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C acc for synthetic data: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{GC\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}COMPUTE RTS AND STS METRICS}
+             \PY{n}{mean\PYZus{}RTS\PYZus{}sim}\PY{p}{,} \PY{n}{mean\PYZus{}STS\PYZus{}sim}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{compute\PYZus{}similarity\PYZus{}metrics}\PY{p}{(}\PY{n}{synthetic\PYZus{}data}\PY{p}{,} \PY{n}{X\PYZus{}0}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{p}{,}\PYZbs{}
+             \PY{n}{real\PYZus{}synthetic\PYZus{}ratio}\PY{p}{,} \PY{n}{synthetic\PYZus{}synthetic\PYZus{}ratio}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RTS similarity: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean\PYZus{}RTS\PYZus{}sim}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{STS similarity: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean\PYZus{}STS\PYZus{}sim}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}COMPUTE STATISTICAL FEATURE DISTANCE}
+             \PY{n}{synthetic\PYZus{}features} \PY{o}{=} \PY{n}{feature\PYZus{}net}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{synthetic\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{SFD} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{compute\PYZus{}SFD}\PY{p}{(}\PY{n}{synthetic\PYZus{}features}\PY{p}{,} \PY{n}{S\PYZus{}X\PYZus{}test\PYZus{}0}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SFD: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{SFD}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{n}{epoch}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{n}{one\PYZus{}segment\PYZus{}real} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X\PYZus{}0}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{X\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch: 1
+D Acc: 0.3
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 0.14
+RTS similarity: -0.021141805164055033
+STS similarity: 0.056477033
+SFD: 2.883744
+
+Epoch: 2
+D Acc: 0.6333333
+G Acc in tricking D: 0.3
+C acc for synthetic data: 0.13
+RTS similarity: 0.012066295920486669
+STS similarity: -0.035126336
+SFD: 2.8256726
+
+Epoch: 3
+D Acc: 0.71666664
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 0.17
+RTS similarity: 0.017917840438460897
+STS similarity: 0.048844807
+SFD: 2.7983966
+
+Epoch: 4
+D Acc: 0.6333333
+G Acc in tricking D: 0.6
+C acc for synthetic data: 0.14
+RTS similarity: 0.03331840334977429
+STS similarity: 0.03227306
+SFD: 2.7300832
+
+Epoch: 5
+D Acc: 0.65
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 0.15
+RTS similarity: 0.04606425086933
+STS similarity: -0.0035067773
+SFD: 2.686722
+
+Epoch: 6
+D Acc: 0.65
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 0.23
+RTS similarity: 0.04736610651076885
+STS similarity: 0.044971835
+SFD: 2.5791335
+
+Epoch: 7
+D Acc: 0.68333334
+G Acc in tricking D: 0.5
+C acc for synthetic data: 0.21
+RTS similarity: 0.011898167492753199
+STS similarity: 0.06905014
+SFD: 2.5240617
+
+Epoch: 8
+D Acc: 0.68333334
+G Acc in tricking D: 0.33333334
+C acc for synthetic data: 0.32
+RTS similarity: 0.023595011006683684
+STS similarity: -0.006193532
+SFD: 2.4418955
+
+Epoch: 9
+D Acc: 0.6166667
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 0.32
+RTS similarity: -0.007090314308620373
+STS similarity: 0.037406288
+SFD: 2.3881607
+
+Epoch: 10
+D Acc: 0.65
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 0.47
+RTS similarity: -0.03790183807954152
+STS similarity: -0.025783038
+SFD: 2.2633824
+
+Epoch: 11
+D Acc: 0.68333334
+G Acc in tricking D: 0.7
+C acc for synthetic data: 0.68
+RTS similarity: 0.004482774879977033
+STS similarity: -0.0023322224
+SFD: 2.154436
+
+Epoch: 12
+D Acc: 0.76666665
+G Acc in tricking D: 0.36666667
+C acc for synthetic data: 0.81
+RTS similarity: -0.0308848653560321
+STS similarity: -0.024323907
+SFD: 2.0458946
+
+Epoch: 13
+D Acc: 0.6166667
+G Acc in tricking D: 0.5
+C acc for synthetic data: 0.9
+RTS similarity: -0.004102783003121075
+STS similarity: -0.037147347
+SFD: 1.9731865
+
+Epoch: 14
+D Acc: 0.68333334
+G Acc in tricking D: 0.5
+C acc for synthetic data: 0.96
+RTS similarity: -0.06769294195090649
+STS similarity: 0.0146910455
+SFD: 1.9166732
+
+Epoch: 15
+D Acc: 0.55
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 0.97
+RTS similarity: -0.028050773346671838
+STS similarity: -0.118105695
+SFD: 1.8181827
+
+Epoch: 16
+D Acc: 0.73333335
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.08261735210302829
+STS similarity: 0.14241819
+SFD: 1.7725978
+
+Epoch: 17
+D Acc: 0.65
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.056508105559995206
+STS similarity: 0.040255405
+SFD: 1.6694932
+
+Epoch: 18
+D Acc: 0.6
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.05553190345023864
+STS similarity: -0.0026938922
+SFD: 1.6891167
+
+Epoch: 19
+D Acc: 0.6166667
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.050302880423961804
+STS similarity: -0.0017135643
+SFD: 1.6405101
+
+Epoch: 20
+D Acc: 0.5833333
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.09533054949291324
+STS similarity: 0.070652924
+SFD: 1.5413059
+
+Epoch: 21
+D Acc: 0.56666666
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.04848407225981666
+STS similarity: 0.05227936
+SFD: 1.5595458
+
+Epoch: 22
+D Acc: 0.18333334
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.05209472070386336
+STS similarity: 0.061662108
+SFD: 1.5663764
+
+Epoch: 23
+D Acc: 0.26666668
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.10140700790898463
+STS similarity: 0.1644978
+SFD: 1.5520947
+
+Epoch: 24
+D Acc: 0.25
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.07535825268568484
+STS similarity: 0.13944216
+SFD: 1.5809581
+
+Epoch: 25
+D Acc: 0.2
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.09222316847153414
+STS similarity: 0.055822987
+SFD: 1.5536432
+
+Epoch: 26
+D Acc: 0.25
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: -0.0814505623464256
+STS similarity: 0.002200295
+SFD: 1.5887883
+
+Epoch: 27
+D Acc: 0.25
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.0964266569848939
+STS similarity: 0.13719295
+SFD: 1.6375432
+
+Epoch: 28
+D Acc: 0.23333333
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.07482844714396514
+STS similarity: 0.07122092
+SFD: 1.6707517
+
+Epoch: 29
+D Acc: 0.26666668
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.09345153795352953
+STS similarity: -0.00911613
+SFD: 1.6301669
+
+Epoch: 30
+D Acc: 0.18333334
+G Acc in tricking D: 0.6333333
+C acc for synthetic data: 1.0
+RTS similarity: -0.10394606621747782
+STS similarity: 0.033539455
+SFD: 1.6673638
+
+Epoch: 31
+D Acc: 0.26666668
+G Acc in tricking D: 0.36666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.10449365448770581
+STS similarity: -0.047752865
+SFD: 1.7406198
+
+Epoch: 32
+D Acc: 0.2
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.1102312383397197
+STS similarity: 0.0789761
+SFD: 1.7340043
+
+Epoch: 33
+D Acc: 0.23333333
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.08427503982731332
+STS similarity: 0.1937136
+SFD: 1.7961873
+
+Epoch: 34
+D Acc: 0.21666667
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.1097932515362211
+STS similarity: 0.06027633
+SFD: 1.7604257
+
+Epoch: 35
+D Acc: 0.16666667
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: -0.07349650787917283
+STS similarity: 0.11209444
+SFD: 1.7794156
+
+Epoch: 36
+D Acc: 0.13333334
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.08651376792587814
+STS similarity: 0.02728377
+SFD: 1.8458872
+
+Epoch: 37
+D Acc: 0.2
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: -0.10337875552141705
+STS similarity: 0.024428127
+SFD: 1.8352944
+
+Epoch: 38
+D Acc: 0.23333333
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.08167369521719432
+STS similarity: 0.032939184
+SFD: 1.8567381
+
+Epoch: 39
+D Acc: 0.2
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.08324175602944812
+STS similarity: -0.032069605
+SFD: 1.8231895
+
+Epoch: 40
+D Acc: 0.23333333
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: -0.056049362208907896
+STS similarity: 0.16016595
+SFD: 1.8488458
+
+Epoch: 41
+D Acc: 0.23333333
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.09388236002455022
+STS similarity: 0.12087729
+SFD: 1.8656583
+
+Epoch: 42
+D Acc: 0.2
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.0914105499138173
+STS similarity: 0.026916314
+SFD: 1.8763372
+
+Epoch: 43
+D Acc: 0.25
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.0606267887799737
+STS similarity: -0.01635782
+SFD: 1.851086
+
+Epoch: 44
+D Acc: 0.23333333
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.07907694668267339
+STS similarity: 0.06309322
+SFD: 1.831932
+
+Epoch: 45
+D Acc: 0.3
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.0837099073511239
+STS similarity: 0.027890513
+SFD: 1.8316827
+
+Epoch: 46
+D Acc: 0.18333334
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: -0.08136069803823076
+STS similarity: 0.0061429404
+SFD: 1.8494219
+
+Epoch: 47
+D Acc: 0.25
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.07770117287480176
+STS similarity: 0.0384233
+SFD: 1.8510338
+
+Epoch: 48
+D Acc: 0.18333334
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.04921459755057974
+STS similarity: 0.021183185
+SFD: 1.8235544
+
+Epoch: 49
+D Acc: 0.18333334
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: -0.08848893785512914
+STS similarity: 0.08175876
+SFD: 1.8367809
+
+Epoch: 50
+D Acc: 0.26666668
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.07267976949839576
+STS similarity: 0.04615786
+SFD: 1.8092836
+
+Epoch: 51
+D Acc: 0.18333334
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.07486047858364094
+STS similarity: 0.08931689
+SFD: 1.7642399
+
+Epoch: 52
+D Acc: 0.15
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.06070704304156154
+STS similarity: 0.025261993
+SFD: 1.81301
+
+Epoch: 53
+D Acc: 0.25
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.09520118670543318
+STS similarity: -0.02271823
+SFD: 1.7627646
+
+Epoch: 54
+D Acc: 0.26666668
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.07057520503911488
+STS similarity: -0.0018609766
+SFD: 1.7879128
+
+Epoch: 55
+D Acc: 0.25
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.059218649124445896
+STS similarity: -0.029919913
+SFD: 1.7499821
+
+Epoch: 56
+D Acc: 0.3
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.04898443512094883
+STS similarity: -0.022908717
+SFD: 1.8075926
+
+Epoch: 57
+D Acc: 0.28333333
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.0655357593734076
+STS similarity: 0.07810141
+SFD: 1.7975519
+
+Epoch: 58
+D Acc: 0.26666668
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.05311562398770615
+STS similarity: 0.072742894
+SFD: 1.7108661
+
+Epoch: 59
+D Acc: 0.15
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: -0.07872965298159515
+STS similarity: 0.03962401
+SFD: 1.7431597
+
+Epoch: 60
+D Acc: 0.2
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.06741929001546222
+STS similarity: -0.019065704
+SFD: 1.7898892
+
+Epoch: 61
+D Acc: 0.3
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.08183960690419137
+STS similarity: 0.08074869
+SFD: 1.733516
+
+Epoch: 62
+D Acc: 0.23333333
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.051337622320375344
+STS similarity: -0.027140107
+SFD: 1.7371048
+
+Epoch: 63
+D Acc: 0.18333334
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.0361556600501493
+STS similarity: 0.06467959
+SFD: 1.749212
+
+Epoch: 64
+D Acc: 0.23333333
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.083917381055335
+STS similarity: 0.041595608
+SFD: 1.794783
+
+Epoch: 65
+D Acc: 0.36666667
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.048698894645115905
+STS similarity: -0.002795282
+SFD: 1.7701421
+
+Epoch: 66
+D Acc: 0.21666667
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.03404835455520552
+STS similarity: 0.107134864
+SFD: 1.7745273
+
+Epoch: 67
+D Acc: 0.25
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.07693849435519735
+STS similarity: 0.05247522
+SFD: 1.7900637
+
+Epoch: 68
+D Acc: 0.31666666
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.03941919592462354
+STS similarity: 0.11648208
+SFD: 1.7847692
+
+Epoch: 69
+D Acc: 0.23333333
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: -0.05588556659133277
+STS similarity: 0.049778033
+SFD: 1.7566692
+
+Epoch: 70
+D Acc: 0.23333333
+G Acc in tricking D: 0.7
+C acc for synthetic data: 1.0
+RTS similarity: -0.05803878397932848
+STS similarity: 0.05798381
+SFD: 1.8160762
+
+Epoch: 71
+D Acc: 0.23333333
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.04411185938518249
+STS similarity: 0.043728966
+SFD: 1.7974722
+
+Epoch: 72
+D Acc: 0.2
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.056462767262872575
+STS similarity: -0.0021918423
+SFD: 1.7201653
+
+Epoch: 73
+D Acc: 0.28333333
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.03217634503632336
+STS similarity: 0.011117237
+SFD: 1.7695781
+
+Epoch: 74
+D Acc: 0.23333333
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.05975292330503917
+STS similarity: 0.044282187
+SFD: 1.7811855
+
+Epoch: 75
+D Acc: 0.28333333
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.04301172992572941
+STS similarity: 0.003088508
+SFD: 1.7629927
+
+Epoch: 76
+D Acc: 0.36666667
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.04606223891261384
+STS similarity: 0.09026155
+SFD: 1.791062
+
+Epoch: 77
+D Acc: 0.2
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.05768367026948363
+STS similarity: 0.0053013256
+SFD: 1.731633
+
+Epoch: 78
+D Acc: 0.3
+G Acc in tricking D: 0.4
+C acc for synthetic data: 1.0
+RTS similarity: -0.025708475520508593
+STS similarity: 0.022688435
+SFD: 1.7288097
+
+Epoch: 79
+D Acc: 0.2
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.05374105186850661
+STS similarity: 0.028174628
+SFD: 1.7707803
+
+Epoch: 80
+D Acc: 0.16666667
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: -0.032685802824780064
+STS similarity: 0.0036414147
+SFD: 1.7197051
+
+Epoch: 81
+D Acc: 0.2
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.04131303486552783
+STS similarity: 0.03919995
+SFD: 1.7228485
+
+Epoch: 82
+D Acc: 0.28333333
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: -0.06919526523380469
+STS similarity: 0.02771247
+SFD: 1.7649603
+
+Epoch: 83
+D Acc: 0.25
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.06072622715319526
+STS similarity: 0.039077852
+SFD: 1.7684608
+
+Epoch: 84
+D Acc: 0.21666667
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.03242200613963356
+STS similarity: -0.05646368
+SFD: 1.712238
+
+Epoch: 85
+D Acc: 0.25
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.043456827732073634
+STS similarity: 0.16585697
+SFD: 1.7577556
+
+Epoch: 86
+D Acc: 0.2
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.047172269966761396
+STS similarity: 0.042993408
+SFD: 1.7422141
+
+Epoch: 87
+D Acc: 0.23333333
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.06093569463565234
+STS similarity: 0.024956115
+SFD: 1.7564796
+
+Epoch: 88
+D Acc: 0.2
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.04082593989377296
+STS similarity: -0.026183803
+SFD: 1.7110171
+
+Epoch: 89
+D Acc: 0.25
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.022692917100308643
+STS similarity: 0.024158154
+SFD: 1.7104743
+
+Epoch: 90
+D Acc: 0.28333333
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.037017934337961605
+STS similarity: 0.060852926
+SFD: 1.7345217
+
+Epoch: 91
+D Acc: 0.21666667
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.019366612469528213
+STS similarity: -0.023946285
+SFD: 1.7587814
+
+Epoch: 92
+D Acc: 0.21666667
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.02950088715366978
+STS similarity: 0.010911909
+SFD: 1.7569594
+
+Epoch: 93
+D Acc: 0.25
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.03258993948405998
+STS similarity: -0.037413936
+SFD: 1.685984
+
+Epoch: 94
+D Acc: 0.23333333
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.02732595503603714
+STS similarity: 0.010624392
+SFD: 1.7646706
+
+Epoch: 95
+D Acc: 0.21666667
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.047867633589362836
+STS similarity: -0.017858082
+SFD: 1.7837586
+
+Epoch: 96
+D Acc: 0.26666668
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: -0.04694247827267112
+STS similarity: 0.049419876
+SFD: 1.7946892
+
+Epoch: 97
+D Acc: 0.26666668
+G Acc in tricking D: 0.7
+C acc for synthetic data: 1.0
+RTS similarity: -0.0530602936118443
+STS similarity: -0.024106175
+SFD: 1.7902969
+
+Epoch: 98
+D Acc: 0.25
+G Acc in tricking D: 0.43333334
+C acc for synthetic data: 1.0
+RTS similarity: -0.05705675399895789
+STS similarity: 0.048844263
+SFD: 1.7873415
+
+Epoch: 99
+D Acc: 0.16666667
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: -0.05422291036455482
+STS similarity: -0.04942155
+SFD: 1.7750927
+
+Epoch: 100
+D Acc: 0.21666667
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: -0.021643641842582332
+STS similarity: -0.019445654
+SFD: 1.7900387
+
+
+    \end{Verbatim}
+
+    Next, we'll train a GAN to generate data for Class 1:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{c+c1}{\PYZsh{} SET CLASS LABEL TO ONE}
+         \PY{n}{class\PYZus{}label} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}CREATE FULL ARCHITECTURE WHERE OUPUT OF GENERATOR IS FED TO DISCRIMINATOR AND CLASSIFIER}
+         \PY{k}{for} \PY{n}{layer} \PY{o+ow}{in} \PY{n}{D\PYZus{}to\PYZus{}freeze}\PY{o}{.}\PY{n}{layers}\PY{p}{:}
+             \PY{n}{layer}\PY{o}{.}\PY{n}{trainable} \PY{o}{=} \PY{k+kc}{False}
+         \PY{n}{GCD} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{inputs}\PY{o}{=}\PY{n}{G\PYZus{}1}\PY{o}{.}\PY{n}{input}\PY{p}{,} \PY{n}{outputs}\PY{o}{=}\PY{p}{[}\PY{n}{D\PYZus{}to\PYZus{}freeze\PYZus{}1}\PY{p}{(}\PY{n}{G\PYZus{}1}\PY{o}{.}\PY{n}{output}\PY{p}{)}\PY{p}{,} \PY{n}{C}\PY{p}{(}\PY{n}{G\PYZus{}1}\PY{o}{.}\PY{n}{output}\PY{p}{)}\PY{p}{,} \PY{n}{feature\PYZus{}net}\PY{p}{(}\PY{n}{G\PYZus{}1}\PY{o}{.}\PY{n}{output}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{GCD}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{binary\PYZus{}crossentropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{binary\PYZus{}crossentropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SFN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{train}\PY{o}{.}\PY{n}{euc\PYZus{}dist\PYZus{}loss}\PY{p}{\PYZcb{}}\PY{p}{,}\PYZbs{}
+                     \PY{n}{optimizer}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{adam}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PYZbs{}
+                     \PY{n}{loss\PYZus{}weights} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{D\PYZus{}loss\PYZus{}weight}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{C\PYZus{}loss\PYZus{}weight}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SFN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{SFD\PYZus{}loss\PYZus{}weight}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         
+         \PY{n}{GC\PYZus{}acc}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{n}{epoch}\PY{o}{=}\PY{l+m+mi}{1}
+         
+         \PY{k}{while} \PY{n}{GC\PYZus{}acc}\PY{o}{\PYZlt{}}\PY{n}{accuracy\PYZus{}threshold} \PY{o+ow}{or} \PY{n}{epoch} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{100}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{epoch}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}TRAIN DISCRIMINATOR AND GENERATOR AND DISPLAY ACCURACY FOR EACH}
+             \PY{n}{D\PYZus{}loss\PYZus{}vec} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{train\PYZus{}D}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{X\PYZus{}1}\PY{p}{,} \PY{n}{G\PYZus{}1}\PY{p}{,} \PY{n}{D\PYZus{}model\PYZus{}1}\PY{p}{,} \PY{n}{latent\PYZus{}dim}\PY{p}{)}
+             \PY{n}{GCD\PYZus{}loss\PYZus{}vec} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{train\PYZus{}G}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{X\PYZus{}1}\PY{p}{,} \PY{n}{class\PYZus{}label}\PY{p}{,} \PY{n}{S\PYZus{}X\PYZus{}train\PYZus{}1}\PY{p}{,} \PY{n}{NUM\PYZus{}CLASSES}\PY{p}{,} \PY{n}{GCD}\PY{p}{,} \PY{n}{latent\PYZus{}dim}\PY{p}{)}
+             \PY{n}{D\PYZus{}acc} \PY{o}{=} \PY{n}{D\PYZus{}loss\PYZus{}vec}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{}accuracy for discriminator during its \PYZdq{}turn\PYZdq{} for training}
+             \PY{n}{GD\PYZus{}acc} \PY{o}{=} \PY{n}{GCD\PYZus{}loss\PYZus{}vec}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{c+c1}{\PYZsh{}accuracy for generator in tricking discriminator}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D Acc: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{D\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G Acc in tricking D: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{GD\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}GENERATE SYNTHETIC DATA AND FEED TO CLASSIFIER TO DETERMINE ACCURACY}
+             \PY{n}{synthetic\PYZus{}data} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{generate\PYZus{}synthetic\PYZus{}data}\PY{p}{(}\PY{n}{test\PYZus{}size}\PY{p}{,} \PY{n}{G\PYZus{}1}\PY{p}{,} \PY{n}{latent\PYZus{}dim}\PY{p}{,} \PY{n}{seq\PYZus{}length}\PY{p}{)}
+             \PY{n}{pred} \PY{o}{=} \PY{n}{C}\PY{o}{.}\PY{n}{predict\PYZus{}classes}\PY{p}{(}\PY{n}{synthetic\PYZus{}data}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{p}{,}\PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{true} \PY{o}{=} \PY{p}{[}\PY{n}{class\PYZus{}label}\PY{p}{]}\PY{o}{*}\PY{n}{test\PYZus{}size}
+             \PY{n}{GC\PYZus{}acc} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{true}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C acc for synthetic data: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{GC\PYZus{}acc}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}COMPUTE RTS AND STS METRICS}
+             \PY{n}{mean\PYZus{}RTS\PYZus{}sim}\PY{p}{,} \PY{n}{mean\PYZus{}STS\PYZus{}sim}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{compute\PYZus{}similarity\PYZus{}metrics}\PY{p}{(}\PY{n}{synthetic\PYZus{}data}\PY{p}{,} \PY{n}{X\PYZus{}1}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{p}{,}\PYZbs{}
+             \PY{n}{real\PYZus{}synthetic\PYZus{}ratio}\PY{p}{,} \PY{n}{synthetic\PYZus{}synthetic\PYZus{}ratio}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RTS similarity: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean\PYZus{}RTS\PYZus{}sim}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{STS similarity: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean\PYZus{}STS\PYZus{}sim}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}COMPUTE STATISTICAL FEATURE DISTANCE}
+             \PY{n}{synthetic\PYZus{}features} \PY{o}{=} \PY{n}{feature\PYZus{}net}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{synthetic\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{SFD} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{compute\PYZus{}SFD}\PY{p}{(}\PY{n}{synthetic\PYZus{}features}\PY{p}{,} \PY{n}{S\PYZus{}X\PYZus{}test\PYZus{}1}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SFD: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{SFD}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{n}{epoch}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{n}{one\PYZus{}segment\PYZus{}real} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{num\PYZus{}channels}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch: 1
+D Acc: 0.3
+G Acc in tricking D: 0.4
+C acc for synthetic data: 0.0
+RTS similarity: 0.18084875729121247
+STS similarity: 0.051844407
+SFD: 2.7332804
+
+Epoch: 2
+D Acc: 0.73333335
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 0.0
+RTS similarity: 0.1896446327946782
+STS similarity: 0.1570558
+SFD: 2.4046726
+
+Epoch: 3
+D Acc: 0.76666665
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 0.0
+RTS similarity: 0.21504260428564276
+STS similarity: 0.2522406
+SFD: 2.1131725
+
+Epoch: 4
+D Acc: 0.8
+G Acc in tricking D: 0.6
+C acc for synthetic data: 0.0
+RTS similarity: 0.24173478464666467
+STS similarity: 0.3155741
+SFD: 1.797136
+
+Epoch: 5
+D Acc: 0.78333336
+G Acc in tricking D: 0.6
+C acc for synthetic data: 0.0
+RTS similarity: 0.2785140842122194
+STS similarity: 0.19260617
+SFD: 1.5556706
+
+Epoch: 6
+D Acc: 0.71666664
+G Acc in tricking D: 0.6
+C acc for synthetic data: 0.0
+RTS similarity: 0.30323274459171073
+STS similarity: 0.21938832
+SFD: 1.4996772
+
+Epoch: 7
+D Acc: 0.76666665
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 0.66
+RTS similarity: 0.2930050316124032
+STS similarity: 0.19930391
+SFD: 1.4023404
+
+Epoch: 8
+D Acc: 0.8666667
+G Acc in tricking D: 0.73333335
+C acc for synthetic data: 1.0
+RTS similarity: 0.31537430424478474
+STS similarity: 0.3517677
+SFD: 1.4328369
+
+Epoch: 9
+D Acc: 0.8
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: 0.30302949009652724
+STS similarity: 0.092804275
+SFD: 1.4343309
+
+Epoch: 10
+D Acc: 0.8
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 1.0
+RTS similarity: 0.27808343398827284
+STS similarity: -0.030659717
+SFD: 1.5202066
+
+Epoch: 11
+D Acc: 0.85
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: 0.3032057561419607
+STS similarity: 0.22400804
+SFD: 1.5671893
+
+Epoch: 12
+D Acc: 0.75
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: 0.27799923221439093
+STS similarity: 0.027506571
+SFD: 1.6701918
+
+Epoch: 13
+D Acc: 0.81666666
+G Acc in tricking D: 0.8
+C acc for synthetic data: 1.0
+RTS similarity: 0.2733031760731396
+STS similarity: 0.23172589
+SFD: 1.7269282
+
+Epoch: 14
+D Acc: 0.9166667
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: 0.28328907654996077
+STS similarity: 0.06661616
+SFD: 1.8660196
+
+Epoch: 15
+D Acc: 0.75
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: 0.2605795911930756
+STS similarity: 0.12941037
+SFD: 1.892074
+
+Epoch: 16
+D Acc: 0.8666667
+G Acc in tricking D: 0.76666665
+C acc for synthetic data: 1.0
+RTS similarity: 0.2696119791328849
+STS similarity: 0.17954594
+SFD: 1.9468215
+
+Epoch: 17
+D Acc: 0.81666666
+G Acc in tricking D: 0.73333335
+C acc for synthetic data: 1.0
+RTS similarity: 0.25111194233877093
+STS similarity: 0.25202292
+SFD: 2.0036952
+
+Epoch: 18
+D Acc: 0.85
+G Acc in tricking D: 0.7
+C acc for synthetic data: 1.0
+RTS similarity: 0.2807378901577032
+STS similarity: 0.2393878
+SFD: 2.0049555
+
+Epoch: 19
+D Acc: 0.75
+G Acc in tricking D: 0.46666667
+C acc for synthetic data: 1.0
+RTS similarity: 0.2926131239628071
+STS similarity: 0.25902668
+SFD: 2.0309944
+
+Epoch: 20
+D Acc: 0.85
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: 0.27864146985705046
+STS similarity: 0.18831024
+SFD: 1.9864813
+
+Epoch: 21
+D Acc: 0.85
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: 0.29472673498836616
+STS similarity: 0.16773753
+SFD: 1.9574442
+
+Epoch: 22
+D Acc: 0.76666665
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: 0.2973005606979878
+STS similarity: 0.20093259
+SFD: 1.9055994
+
+Epoch: 23
+D Acc: 0.85
+G Acc in tricking D: 0.8
+C acc for synthetic data: 1.0
+RTS similarity: 0.3193268480256453
+STS similarity: 0.30806884
+SFD: 1.8751236
+
+Epoch: 24
+D Acc: 0.8333333
+G Acc in tricking D: 0.7
+C acc for synthetic data: 1.0
+RTS similarity: 0.317977976038488
+STS similarity: 0.28198284
+SFD: 1.7662978
+
+Epoch: 25
+D Acc: 0.9166667
+G Acc in tricking D: 0.73333335
+C acc for synthetic data: 1.0
+RTS similarity: 0.32200960385434096
+STS similarity: 0.2510117
+SFD: 1.7317163
+
+Epoch: 26
+D Acc: 0.8666667
+G Acc in tricking D: 0.56666666
+C acc for synthetic data: 1.0
+RTS similarity: 0.3229406316415193
+STS similarity: 0.3160512
+SFD: 1.6969131
+
+Epoch: 27
+D Acc: 0.8666667
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: 0.3283288622241217
+STS similarity: 0.23683615
+SFD: 1.6710675
+
+Epoch: 28
+D Acc: 0.8666667
+G Acc in tricking D: 0.7
+C acc for synthetic data: 1.0
+RTS similarity: 0.328577370155922
+STS similarity: 0.37278894
+SFD: 1.633411
+
+Epoch: 29
+D Acc: 0.85
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: 0.3291319503506989
+STS similarity: 0.353957
+SFD: 1.6482668
+
+Epoch: 30
+D Acc: 0.8833333
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 1.0
+RTS similarity: 0.34141516793800253
+STS similarity: 0.33959496
+SFD: 1.6427939
+
+Epoch: 31
+D Acc: 0.8666667
+G Acc in tricking D: 0.6333333
+C acc for synthetic data: 1.0
+RTS similarity: 0.3514920473024854
+STS similarity: 0.45265788
+SFD: 1.6226164
+
+Epoch: 32
+D Acc: 0.8833333
+G Acc in tricking D: 0.6333333
+C acc for synthetic data: 1.0
+RTS similarity: 0.3411602383118918
+STS similarity: 0.1405784
+SFD: 1.6657972
+
+Epoch: 33
+D Acc: 0.8333333
+G Acc in tricking D: 0.6333333
+C acc for synthetic data: 1.0
+RTS similarity: 0.34972735402930893
+STS similarity: 0.37173915
+SFD: 1.6379813
+
+Epoch: 34
+D Acc: 0.95
+G Acc in tricking D: 0.6333333
+C acc for synthetic data: 1.0
+RTS similarity: 0.34136889936817766
+STS similarity: 0.2804789
+SFD: 1.7095265
+
+Epoch: 35
+D Acc: 0.9
+G Acc in tricking D: 0.8333333
+C acc for synthetic data: 1.0
+RTS similarity: 0.34091801244228837
+STS similarity: 0.38117206
+SFD: 1.7216094
+
+Epoch: 36
+D Acc: 0.8
+G Acc in tricking D: 0.7
+C acc for synthetic data: 1.0
+RTS similarity: 0.35289709610744524
+STS similarity: 0.21994755
+SFD: 1.7427394
+
+Epoch: 37
+D Acc: 0.8833333
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: 0.3528711382256298
+STS similarity: 0.37772927
+SFD: 1.7841607
+
+Epoch: 38
+D Acc: 0.8666667
+G Acc in tricking D: 0.7
+C acc for synthetic data: 1.0
+RTS similarity: 0.3411613034913856
+STS similarity: 0.34473127
+SFD: 1.8201245
+
+Epoch: 39
+D Acc: 0.9
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 1.0
+RTS similarity: 0.36291412164386827
+STS similarity: 0.294949
+SFD: 1.809498
+
+Epoch: 40
+D Acc: 0.8833333
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: 0.35060482453341085
+STS similarity: 0.35200447
+SFD: 1.830957
+
+Epoch: 41
+D Acc: 0.93333334
+G Acc in tricking D: 0.53333336
+C acc for synthetic data: 1.0
+RTS similarity: 0.35928020558294405
+STS similarity: 0.3492139
+SFD: 1.8524349
+
+Epoch: 42
+D Acc: 0.95
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 1.0
+RTS similarity: 0.3683882926148896
+STS similarity: 0.34655115
+SFD: 1.8395839
+
+Epoch: 43
+D Acc: 0.95
+G Acc in tricking D: 0.6333333
+C acc for synthetic data: 1.0
+RTS similarity: 0.37229816135078014
+STS similarity: 0.36268622
+SFD: 1.7909847
+
+Epoch: 44
+D Acc: 0.93333334
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 1.0
+RTS similarity: 0.3845698131367443
+STS similarity: 0.40520245
+SFD: 1.7609308
+
+Epoch: 45
+D Acc: 0.9166667
+G Acc in tricking D: 0.6333333
+C acc for synthetic data: 1.0
+RTS similarity: 0.39285136285349326
+STS similarity: 0.38287485
+SFD: 1.7628305
+
+Epoch: 46
+D Acc: 0.8833333
+G Acc in tricking D: 0.6
+C acc for synthetic data: 1.0
+RTS similarity: 0.3881598054822606
+STS similarity: 0.39165005
+SFD: 1.7163074
+
+Epoch: 47
+D Acc: 0.95
+G Acc in tricking D: 0.5
+C acc for synthetic data: 1.0
+RTS similarity: 0.39951149762015953
+STS similarity: 0.40899903
+SFD: 1.7105823
+
+Epoch: 48
+D Acc: 0.8833333
+G Acc in tricking D: 0.6666667
+C acc for synthetic data: 1.0
+RTS similarity: 0.4039118783415921
+STS similarity: 0.36785257
+SFD: 1.7032247
+
+Epoch: 49
+D Acc: 0.9
+G Acc in tricking D: 0.73333335
+C acc for synthetic data: 1.0
+RTS similarity: 0.40898726032456195
+STS similarity: 0.42651853
+SFD: 1.6540818
+
+Epoch: 50
+D Acc: 0.95
+G Acc in tricking D: 0.76666665
+C acc for synthetic data: 1.0
+RTS similarity: 0.4091343613008105
+STS similarity: 0.46275038
+SFD: 1.6461743
+
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

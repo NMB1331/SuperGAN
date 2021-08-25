@@ -1,0 +1,4 @@
+/Users/nmb1331/CS475-GANProject/sports_data_segmented.h5
+pretrained_HAR_classifier_LSTM.h5
+3
+SuperGAN_SFD1_AccelData_Class3/

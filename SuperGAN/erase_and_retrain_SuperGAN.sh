@@ -1,0 +1,83 @@
+echo Deleting old Super GANs...
+
+rm -rf SuperGAN_SFD0_AccelData_Class0
+rm -rf SuperGAN_SFD0_AccelData_Class1
+rm -rf SuperGAN_SFD0_AccelData_Class2
+rm -rf SuperGAN_SFD0_AccelData_Class3
+rm -rf SuperGAN_SFD0_AccelData_Class4
+rm -rf SuperGAN_SFD0_AccelData_Class5
+rm -rf SuperGAN_SFD0_AccelData_Class6
+rm -rf SuperGAN_SFD0_AccelData_Class7
+rm -rf SuperGAN_SFD0_AccelData_Class8
+
+rm -rf SuperGAN_SFD0_GyroData_Class0
+rm -rf SuperGAN_SFD0_GyroData_Class1
+rm -rf SuperGAN_SFD0_GyroData_Class2
+rm -rf SuperGAN_SFD0_GyroData_Class3
+rm -rf SuperGAN_SFD0_GyroData_Class4
+rm -rf SuperGAN_SFD0_GyroData_Class5
+rm -rf SuperGAN_SFD0_GyroData_Class6
+rm -rf SuperGAN_SFD0_GyroData_Class7
+rm -rf SuperGAN_SFD0_GyroData_Class8
+
+rm -rf SuperGAN_SFD1_GyroData_Class0
+rm -rf SuperGAN_SFD1_GyroData_Class1
+rm -rf SuperGAN_SFD1_GyroData_Class2
+rm -rf SuperGAN_SFD1_GyroData_Class3
+rm -rf SuperGAN_SFD1_GyroData_Class4
+rm -rf SuperGAN_SFD1_GyroData_Class5
+rm -rf SuperGAN_SFD1_GyroData_Class6
+rm -rf SuperGAN_SFD1_GyroData_Class7
+rm -rf SuperGAN_SFD1_GyroData_Class8
+
+rm -rf SuperGenerator_AccelData_Class0
+rm -rf SuperGenerator_AccelData_Class1
+rm -rf SuperGenerator_AccelData_Class2
+rm -rf SuperGenerator_AccelData_Class3
+rm -rf SuperGenerator_AccelData_Class4
+rm -rf SuperGenerator_AccelData_Class5
+rm -rf SuperGenerator_AccelData_Class6
+rm -rf SuperGenerator_AccelData_Class7
+rm -rf SuperGenerator_AccelData_Class8
+
+echo Creating new GAN folders...
+
+mkdir SuperGAN_SFD0_AccelData_Class0
+mkdir SuperGAN_SFD0_AccelData_Class1
+mkdir SuperGAN_SFD0_AccelData_Class2
+mkdir SuperGAN_SFD0_AccelData_Class3
+mkdir SuperGAN_SFD0_AccelData_Class4
+mkdir SuperGAN_SFD0_AccelData_Class5
+mkdir SuperGAN_SFD0_AccelData_Class6
+mkdir SuperGAN_SFD0_AccelData_Class7
+mkdir SuperGAN_SFD0_AccelData_Class8
+
+mkdir SuperGAN_SFD1_AccelData_Class0
+mkdir SuperGAN_SFD1_AccelData_Class1
+mkdir SuperGAN_SFD1_AccelData_Class2
+mkdir SuperGAN_SFD1_AccelData_Class3
+mkdir SuperGAN_SFD1_AccelData_Class4
+mkdir SuperGAN_SFD1_AccelData_Class5
+mkdir SuperGAN_SFD1_AccelData_Class6
+mkdir SuperGAN_SFD1_AccelData_Class7
+mkdir SuperGAN_SFD1_AccelData_Class8
+
+mkdir SuperGAN_SFD0_GyroData_Class0
+mkdir SuperGAN_SFD0_GyroData_Class1
+mkdir SuperGAN_SFD0_GyroData_Class2
+mkdir SuperGAN_SFD0_GyroData_Class3
+mkdir SuperGAN_SFD0_GyroData_Class4
+mkdir SuperGAN_SFD0_GyroData_Class5
+mkdir SuperGAN_SFD0_GyroData_Class6
+mkdir SuperGAN_SFD0_GyroData_Class7
+mkdir SuperGAN_SFD0_GyroData_Class8
+
+mkdir SuperGAN_SFD1_GyroData_Class0
+mkdir SuperGAN_SFD1_GyroData_Class1
+mkdir SuperGAN_SFD1_GyroData_Class2
+mkdir SuperGAN_SFD1_GyroData_Class3
+mkdir SuperGAN_SFD1_GyroData_Class4
+mkdir SuperGAN_SFD1_GyroData_Class5
+mkdir SuperGAN_SFD1_GyroData_Class6
+mkdir SuperGAN_SFD1_GyroData_Class7
+mkdir SuperGAN_SFD1_GyroData_Class8
