@@ -1,0 +1,4 @@
+/Users/nmb1331/gans_deep_learning/IMWUT_GAN/code/NateBurley_Research_GANs/FallingData/fall_data_segmented.h5
+/Users/nmb1331/gans_deep_learning/IMWUT_GAN/code/NateBurley_Research_GANs/FallingData/FALL_classifier_sub3epochs.h5
+0
+SuperGAN_SFD1_FallData_Class0/
