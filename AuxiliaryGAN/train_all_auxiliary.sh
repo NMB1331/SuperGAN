@@ -1,0 +1,6 @@
+echo Training Auxiliary Generators....
+
+python main_auxiliary.py TrainScripts/train_auxiliary_SFD0_GyroData.txt
+python main_auxiliary.py TrainScripts/train_auxiliary_SFD1_GyroData.txt
+python main_auxiliary.py TrainScripts/train_auxiliary_SFD0_SportsData.txt
+python main_auxiliary.py TrainScripts/train_auxiliary_SFD1_SportsData.txt
