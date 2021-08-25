@@ -1,0 +1,6 @@
+../sports_data_segmented.h5
+../pretrained_HAR_classifier_ConvLSTM.h5
+0
+ConditionalGenerators_CASE3_SFD1_SportsData/
+1
+conditional_CASE3_SFD1_SportsData_train_results.csv

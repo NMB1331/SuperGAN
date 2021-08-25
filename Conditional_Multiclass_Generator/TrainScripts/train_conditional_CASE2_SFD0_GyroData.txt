@@ -1,0 +1,6 @@
+/Users/nmb1331/CS475-GANProject/GyroscopeDatasetCode/gyro_sports_data.h5
+/Users/nmb1331/CS475-GANProject/GyroscopeDatasetCode/GYRO_classifier_sub18epochs.h5
+0
+ConditionalGenerators_CASE2_SFD0_GyroData/
+0
+conditional_CASE2_SFD0_GyroData_train_results.csv
